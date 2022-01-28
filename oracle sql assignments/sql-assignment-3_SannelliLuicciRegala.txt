@@ -1,0 +1,76 @@
+a. 
+CREATE TABLE salesman_master (
+salesman_no varchar(6) PRIMARY KEY,
+salesman_name varchar(20) NOT NULL,
+Address1 varchar(30) NOT NULL,
+Address2 varchar(30),
+city varchar(20),
+pincode varchar(6),
+state varchar(20),
+sal_amt number(8,2) NOT NULL,
+tgt_to_get number(6,2) NOT NULL,
+ytd_sales number(6,2) NOT NULL,
+remarks varchar(60),
+CONSTRAINT pk_start_s CHECK (salesman_no LIKE 'S%'),
+CONSTRAINT sal_amt_not_0 CHECK (sal_amt > 0),
+CONSTRAINT tgt_to_get_not_0 CHECK (tgt_to_get > 0)
+);
+
+b. 
+CREATE TABLE sales_order (
+s_order_no varchar(6) PRIMARY KEY,
+s_order_date date,		
+client_no varchar(6),
+dely_addr varchar(25),
+salesman_no varchar(6),
+dely_type char(1) DEFAULT 'F',
+billed_yn char(1) DEFAULT 'N',	
+dely_date date,
+order_status varchar(10),
+CONSTRAINT fk_salesman_no FOREIGN KEY (salesman_no) REFERENCES salesman_master(salesman_no),
+CONSTRAINT s_order_no_start_o CHECK (s_order_no LIKE 'O%'),
+CONSTRAINT dely_type_const CHECK (dely_type in ('F', 'P')),
+CONSTRAINT billed_yn_const CHECK (billed_yn in ('Y', 'N')),
+CONSTRAINT dely_date_check CHECK (dely_date > s_order_date),
+CONSTRAINT order_status_const CHECK (order_status in ('IP', 'F', 'BO', 'C'))
+);
+
+c. 
+CREATE TABLE sales_order_details (
+s_order_no varchar(6),
+product_no varchar(6),
+qty_ordered numeric(8),
+qty_disp numeric(8),
+product_rate numeric(10,2),
+CONSTRAINT fk_s_order_no FOREIGN KEY (s_order_no) REFERENCES sales_order(s_order_no)
+);
+
+3. 
+INSERT INTO salesman_master VALUES ('S00001', 'Kiran', 'A/14', 'Worli', 'Bombay', '400002', 'MAH', 3000, 100, 50, 'Good');
+INSERT INTO salesman_master VALUES ('S00002', 'Manish', '65', 'Nariman', 'Bombay', '400001', 'MAH', 3000, 200, 100, 'Good');
+INSERT INTO salesman_master VALUES ('S00003', 'Ravi', 'P-7', 'Bandra', 'Bombay', '400032', 'MAH', 3000, 200, 100, 'Good');
+INSERT INTO salesman_master VALUES ('S00004', 'Ashish', 'A/5', 'Juhu', 'Bombay', '400044', 'MAH', 3500, 200, 150, 'Good');
+
+4. 
+INSERT INTO sales_order (s_order_no, s_order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_status) VALUES ('O19001', '12-Jan-2021', 'C00001', 'F', 'N', 'S00001', '20-Jan-2021', 'IP');
+INSERT INTO sales_order (s_order_no, s_order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_status) VALUES ('O19002', '25-Jan-2021', 'C00002', 'P', 'N', 'S00002', '27-Jan-2021', 'C');
+INSERT INTO sales_order (s_order_no, s_order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_status) VALUES ('O46865', '18-Feb-2021', 'C00003', 'F', 'Y', 'S00003', '20-Feb-2021', 'F');
+INSERT INTO sales_order (s_order_no, s_order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_status) VALUES ('O19003', '03-Apr-2021', 'C00001', 'F', 'Y', 'S00001', '07-Apr-2021', 'F');
+INSERT INTO sales_order (s_order_no, s_order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_status) VALUES ('O46866', '20-May-2021', 'C00004', 'P', 'N', 'S00002', '22-May-2021', 'C');
+INSERT INTO sales_order (s_order_no, s_order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_status) VALUES ('O10008', '24-May-2021', 'C00005', 'F', 'N', 'S00004', '26-May-2021', 'IP');
+
+5. 
+INSERT INTO sales_order_details VALUES ('O19001', 'P00001', 4, 4, 525);
+INSERT INTO sales_order_details VALUES ('O19001', 'P07965', 2, 1, 8400);
+INSERT INTO sales_order_details VALUES ('O19001', 'P07885', 2, 1, 5250);
+INSERT INTO sales_order_details VALUES ('O19002', 'P00001', 10, 0, 525);
+INSERT INTO sales_order_details VALUES ('O46865', 'P07868', 3, 3, 3150);
+INSERT INTO sales_order_details VALUES ('O46865', 'P07885', 3, 1, 5250);
+INSERT INTO sales_order_details VALUES ('O46865', 'P00001', 10, 10, 525);
+INSERT INTO sales_order_details VALUES ('O46865', 'P03453', 4, 4, 1050);
+INSERT INTO sales_order_details VALUES ('O19003', 'P03453', 2, 2, 1050);
+INSERT INTO sales_order_details VALUES ('O19003', 'P06734', 1, 1, 12000);
+INSERT INTO sales_order_details VALUES ('O46866', 'P07965', 1, 0, 8400);
+INSERT INTO sales_order_details VALUES ('O46866', 'P07975', 1, 0, 1050);
+INSERT INTO sales_order_details VALUES ('O10008', 'P00001', 10, 5, 525);
+INSERT INTO sales_order_details VALUES ('O10008', 'P07975', 5, 3, 1050);
