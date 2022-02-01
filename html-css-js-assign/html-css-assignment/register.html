@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="register-style.css">
+</head>
+<body>
+    <form action="#" id="register-form" method="post">
+        <h2>Register</h2>
+        <div class="form-body">
+            <div class="form-row">
+                <label for="first-name">First Name</label>
+                <input type="text" name="first-name" id="first-name" placeholder="Input First Name Here">
+            </div>
+            <div class="form-row">
+                <label for="middle-name">Middle Name</label>
+                <input type="text" name="middle-name" id="middle-name" placeholder="Input Middle Name Here">
+            </div>
+            <div class="form-row">
+                <label for="last-name">Last Name</label>
+                <input type="text" name="last-name" id="last-name" placeholder="Input Last Name Here">
+            </div>
+            <div class="form-row">
+                <label for="bday">Birthday</label>
+                <input type="date" name="bday" id="bday">
+            </div>
+            <div class="form-row">
+                <label for="celnum">Mobile Number</label>
+                <input type="tel" name="celnum" id="celnum" placeholder="Format: 0915-111-2222" pattern="0[0-9]{3}-[0-9]{3}-[0-9]{4}">
+            </div>
+                <div class="form-row">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Input Email Address Here">
+            </div>
+
+            <div class="form-row">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-input" placeholder="Username">
+            </div>
+            <div class="form-row">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-input" placeholder="Password">
+            </div>
+            <div class="form-row">
+                <label for="c-pass">Confirm Password</label>
+                <input type="password" name="c-pass" id="c-pass" class="form-input" placeholder="Confirm Password">
+            </div>
+        </div>
+        <div class="center">
+            <button>Register</button>
+        </div>
+    </form>
+</body>
+</html>

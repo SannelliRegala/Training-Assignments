@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <form action="" id="register-form" method="post">
+        <h2>Product Order</h2>
+        <div class="form-body">
+            <div class="form-row">
+                <label for="product">Select Product</label>
+                <select name="product" id="product" onchange="changePrice(); calculatePrice();">
+                    <option disabled selected value> -- Select a Product -- </option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Microphone">Microphone</option>
+                    <option value="Headset">Headset</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="price">Price</label>
+                <input type="text" name="price" id="price" placeholder="Price" readonly="readonly">
+            </div>
+            <div class="form-radio-group">
+                <div class="form-row">
+                    <label for="">Discount</label>
+                </div>
+                <div class="form-row">
+                    <input type="radio" name="discount" id="0%disc" value="0" onclick="calculatePrice();" checked="checked">
+                    <label for="0%disc">No Discount</label>
+                </div>
+                <div class="form-row">
+                    <input type="radio" name="discount" id="20%disc" value=".2" onclick="calculatePrice();">
+                    <label for="20%disc">20% Discount</label>
+                </div>
+                <div class="form-row">
+                    <input type="radio" name="discount" id="50%disc" value=".5" onclick="calculatePrice();">
+                    <label for="50%disc">50% Discount</label>
+                </div>
+                <div class="form-row">
+                    <input type="radio" name="discount" id="60%disc" value=".6" onclick="calculatePrice();">
+                    <label for="60%disc">60% Discount</label>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <label for="disc_price">Discounted Price</label>
+                <input type="text" name="disc_price" id="disc_price" placeholder="Discounted Price" readonly="readonly">
+            </div>
+        </div>
+        <div class="center">
+            <button onclick="confirmOrder()">Place Order</button>
+        </div>
+    </form>
+</body>
+</html>
