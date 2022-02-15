@@ -1,0 +1,124 @@
+1.
+-> App.js
+
+import './App.css';
+import React from 'react';
+import Login from './Login';
+
+export default function App() {
+
+  return (
+    <div>
+      <Login isLoggedIn={false}/>
+    </div>
+  );
+}
+
+
+-> Login.js
+
+import NumberList from './NumberList';
+
+export default function Login(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return <NumberList />;
+    } else{
+        return <div>
+            <center>
+                <h2>LOGIN</h2>
+                <label>Username</label>
+                <input placeholder='username' value="" />
+                <br/>
+                <label>Password</label>
+                <input placeholder='password' value="" />
+                <br/>
+                <button type='button'>Log in</button>
+            </center>
+        </div>;
+    }
+}
+
+
+-> NumberList.js
+
+import React from 'react';
+export default class NumberList extends React.Component {
+    render() {
+       return (
+           <div>
+               <h2>NumberList View</h2>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+           </div>
+       );
+    }
+ }
+
+2.
+-> App.js
+
+import TableRow from './TableRow';
+import React, {Component} from 'react';
+
+export default class App extends Component{
+  state = {
+      data: 
+      [
+        {
+            "id":1,
+            "name":"Foo",
+            "age":"20"
+        },
+        {
+            "id":2,
+            "name":"Bar",
+            "age":"30"
+        },
+        {
+            "id":3,
+            "name":"Baz",
+            "age":"40"
+        }
+      ]
+  }
+   
+    render() {
+      return(
+          <div>
+              <h2>Table Data</h2>
+              <table border="1">
+              <tbody>
+              {this.state.data.map((item, i) => <TableRow key = {i} 
+                      data = {item} />)}
+              </tbody>
+              </table>
+          </div>
+      );
+    }    
+}
+
+
+-> TableRow.js
+
+import React from 'react';
+export default class TableRow extends React.Component {
+    render() {
+       return (
+        <tr>
+            <td>{this.props.data.id}</td>
+            <td>{this.props.data.name}</td>
+            <td>{this.props.data.age}</td>
+        </tr>
+       );
+    }
+ }
+
+
+
+
