@@ -1,0 +1,109 @@
+1. Installed NodeJS and Visual Studio Code
+
+2.
+-> App.js
+
+import React from 'react';
+import './style.css';
+
+import Welcome from './Welcome';
+
+export default function App() {
+  let user = prompt("Please enter your name", "User");
+
+  return (
+    <div>
+      <Welcome name={user}/>
+    </div>
+  );
+}
+
+-> Welcome.js
+
+import React from 'react';
+
+export default function Welcome(props) {
+  return (
+    <div>
+      <h2>Hello, {props.name}</h2>
+    </div>
+  );
+}
+
+
+3. 
+-> App.js
+
+import React from 'react';
+import './style.css';
+
+import Addition from './Addition';
+
+export default function App() {
+
+  let num1 = prompt("Enter the first number", 0);
+  let num2 = prompt("Enter the second number", 0);
+  return (
+    <div>
+      <Addition num1={num1} num2={num2}/>
+    </div>
+  );
+}
+
+-> Addition.js
+
+import React from 'react';
+
+export default function Welcome(props) {
+  return (
+    <div>
+      <h2>{props.num1} plus {props.num2} is equals to {parseInt(props.num1) + parseInt(props.num2)}</h2>
+    </div>
+  );
+}
+
+
+4. 
+-> App.js
+
+import React from 'react';
+import './style.css';
+
+import Card from './Card';
+
+export default function App() {
+  return (
+    <div>
+      <Card age="12"/>
+    </div>
+  );
+}
+
+-> Card.js
+
+import React, {Component} from 'react';
+
+export default class Card extends Component{
+
+    validateNumber(){
+        if(isNaN(this.props.age)){
+            alert("Not a number!");
+            return "Not a number";
+        } else{
+            return this.props.age;
+        }
+    }
+    render() {
+        return(
+            <div>
+                <h3>{this.validateNumber()}</h3>
+            </div>
+        );
+      }    
+}
+
+
+5. Virtual DOM in React is the representation created and updated by React and is compared with 
+the actual DOM and the differences are then eventually updated on the screen. It is faster and more 
+efficient as the whole DOM doesn't need to be completely reloaded to change only a few elements, it will 
+only update elements which have changed.
